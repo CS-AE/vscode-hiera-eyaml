@@ -1,4 +1,4 @@
-# hiera-eyaml
+# hiera-eyaml-gpg
 
 This extension adds support for running encrypt/decrypt commands within yaml files using hiera-eyaml-gpg package. The hiera-eyaml-gpg gem is required to be installed.
 
