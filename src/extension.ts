@@ -3,8 +3,8 @@ import * as crypt from './commands/crypt'
 import * as exec from './commands/exec'
 
 export function activate(ctx: vscode.ExtensionContext) {
-    ctx.subscriptions.push(vscode.commands.registerCommand('hiera-eyaml.Encrypt', () => { doCrypt(crypt.commands.CryptKind.Encrypt); }));
-    ctx.subscriptions.push(vscode.commands.registerCommand('hiera-eyaml.Decrypt', () => { doCrypt(crypt.commands.CryptKind.Decrypt); }));
+    ctx.subscriptions.push(vscode.commands.registerCommand('hiera-eyaml-gpg.Encrypt', () => { doCrypt(crypt.commands.CryptKind.Encrypt); }));
+    ctx.subscriptions.push(vscode.commands.registerCommand('hiera-eyaml-gpg.Decrypt', () => { doCrypt(crypt.commands.CryptKind.Decrypt); }));
 }
 
 function doCrypt(cryptKind: crypt.commands.CryptKind) {
@@ -21,10 +21,10 @@ function doCrypt(cryptKind: crypt.commands.CryptKind) {
     }
 
     const text = editor.document.getText(selection);
-    const output = vscode.window.createOutputChannel("hiera-eyaml");
+    const output = vscode.window.createOutputChannel("hiera-eyaml-gpg");
 
     if (text != null) {
-        const rawConfig = vscode.workspace.getConfiguration("hiera-eyaml");
+        const rawConfig = vscode.workspace.getConfiguration("hiera-eyaml-gpg");
         const execCommand = new exec.commands.ExecCommandImpl();
         const cryptCommand = crypt.commands.getInstance(cryptKind, rawConfig, execCommand);
 
@@ -34,7 +34,7 @@ function doCrypt(cryptKind: crypt.commands.CryptKind) {
                 builder.replace(selection, preparedOutput);
             });
         }).catch((error) => {
-            output.appendLine(`hiera-eyaml.${cryptKind}: Failed: `);
+            output.appendLine(`hiera-eyaml-gpg.${cryptKind}: Failed: `);
             output.append(error);
             vscode.window.showErrorMessage("eyaml execution failed, more information in the output tab.");
         });

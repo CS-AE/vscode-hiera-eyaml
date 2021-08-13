@@ -59,7 +59,7 @@ export namespace commands {
         }
 
         protected buildExecString(): string {
-            return `${this.currentConfig.eyamlPath} decrypt --stdin --pkcs7-public-key "${this.currentConfig.publicKeyPath}" --pkcs7-private-key "${this.currentConfig.privateKeyPath}"`;
+            return `${this.currentConfig.eyamlPath} decrypt -n gpg --stdin --gpg-always-trust"`;
         }
 
         protected prepareInput(input: string): string {
@@ -76,22 +76,11 @@ export namespace commands {
         }
 
         protected buildExecString(): string {
-            return `${this.currentConfig.eyamlPath} encrypt -o ${this.currentConfig.outputFormat} --stdin --pkcs7-public-key "${this.currentConfig.publicKeyPath}"`;
+            return `${this.currentConfig.eyamlPath} encrypt --output=${this.currentConfig.outputFormat} --stdin --gpg-recipients=${this.currentConfig.recipients} --gpg-always-trust"`;
         }
 
         public prepareOutput(output: string): string {
-            switch (this.currentConfig.outputFormat) {
-                case config.OutputFormat.Block:
-                    let preparedOutput = "";
-
-                    for (let i = 0; i < output.length; i += this.currentConfig.outputBlockSize) {
-                        preparedOutput += output.substring(i, i + this.currentConfig.outputBlockSize) + "\n";
-                    }
-
-                    return super.prepareOutput(preparedOutput);
-                default:
-                    return super.prepareOutput(output);
-            }
+            return super.prepareOutput(output);
         }
     }
 }

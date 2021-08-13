@@ -1,24 +1,26 @@
 {
-    "name": "hiera-eyaml",
-    "displayName": "hiera-eyaml",
-    "description": "Encrypt/decrypt using hiera-eyaml.",
-    "version": "1.0.1",
-    "publisher": "brandontosch",
-    "author":{
-        "name": "Brandon Tosch",
-        "email": "brandontosch@gmail.com"
+    "name": "hiera-eyaml-gpg",
+    "displayName": "hiera-eyaml-gpg",
+    "description": "Encrypt/decrypt using hiera-eyaml-gpg.",
+    "version": "0.0.1",
+    "publisher": "conorsokell",
+    "author": {
+        "name": "Conor Sokell",
+        "email": "conorsokell@me.com"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/brandontosch/vscode-hiera-eyaml"
+        "url": "https://github.com/CS-AE/vscode-hiera-eyaml"
     },
     "bugs": {
-        "url": "https://github.com/brandontosch/vscode-hiera-eyaml/issues"
+        "url": "https://github.com/CS-AE/vscode-hiera-eyaml/issues"
     },
     "keywords": [
         "hiera",
         "eyaml",
         "hiera-eyaml",
+        "hiera-eyaml-gpg",
+        "gpg",
         "puppet"
     ],
     "engines": {
@@ -34,19 +36,19 @@
     "contributes": {
         "commands": [
             {
-                "command": "hiera-eyaml.Encrypt",
+                "command": "hiera-eyaml-gpg.Encrypt",
                 "title": "Encrypt selection with eyaml"
             },
             {
-                "command": "hiera-eyaml.Decrypt",
+                "command": "hiera-eyaml-gpg.Decrypt",
                 "title": "Decrypt selection with eyaml"
             }
         ],
         "configuration": {
             "type": "object",
-            "title": "hiera-eyaml configuration",
+            "title": "hiera-eyaml-gpg configuration",
             "properties": {
-                "hiera-eyaml" :{
+                "hiera-eyaml-gpg": {
                     "type": "object",
                     "properties": {
                         "eyamlPath": {
@@ -54,40 +56,33 @@
                             "default": "eyaml",
                             "description": "Path to the eyaml command line utility."
                         },
-                        "publicKeyPath": {
-                            "type": "string",
-                            "default": "",
-                            "description": "Path to the public key to use for encryption and decryption."
-                        },
-                        "privateKeyPath": {
-                            "type": "string",
-                            "default": "",
-                            "description": "Path to private key to use for decryption."
-                        },
                         "outputFormat": {
                             "type": "string",
-                            "default": "Block",
+                            "default": "String",
                             "description": "Formatting to use for encrypted value (String or Block)."
                         },
-                        "outputBlockSize": {
-                            "type": "number",
-                            "default": 74,
-                            "description": "Specifies the length of each line when using Block output format."
-                        }       
+                        "recipients": {
+                            "type": "string",
+                            "default": "String",
+                            "description": "List of recipients in email format seporated by commar for multiple. (String)"
+                        }
                     }
                 }
             }
         },
         "menus": {
-            "editor/context": [{
-                "when": "resourceLangId == yaml",
-                "command": "hiera-eyaml.Encrypt",
-                "group": "1_modification@10001"
-            },{
-                "when": "resourceLangId == yaml",
-                "command": "hiera-eyaml.Decrypt",
-                "group": "1_modification@10002"
-            }]
+            "editor/context": [
+                {
+                    "when": "resourceLangId == yaml",
+                    "command": "hiera-eyaml-gpg.Encrypt",
+                    "group": "1_modification@10001"
+                },
+                {
+                    "when": "resourceLangId == yaml",
+                    "command": "hiera-eyaml-gpg.Decrypt",
+                    "group": "1_modification@10002"
+                }
+            ]
         }
     },
     "scripts": {
