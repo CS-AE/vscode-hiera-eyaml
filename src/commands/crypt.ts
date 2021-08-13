@@ -59,7 +59,7 @@ export namespace commands {
         }
 
         protected buildExecString(): string {
-            return `${this.currentConfig.eyamlPath} decrypt -n gpg --stdin --gpg-always-trust"`;
+            return `"${this.currentConfig.eyamlPath} decrypt -n gpg --stdin --gpg-always-trust"`;
         }
 
         protected prepareInput(input: string): string {
@@ -76,7 +76,7 @@ export namespace commands {
         }
 
         protected buildExecString(): string {
-            return `${this.currentConfig.eyamlPath} encrypt --output=${this.currentConfig.outputFormat} --stdin --gpg-recipients=${this.currentConfig.recipients} --gpg-always-trust"`;
+            return `"${this.currentConfig.eyamlPath} encrypt -n gpg --stdin --gpg-recipients=${this.currentConfig.recipients} --gpg-always-trust --output=string"`;
         }
 
         public prepareOutput(output: string): string {

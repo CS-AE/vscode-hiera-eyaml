@@ -1,7 +1,7 @@
 {
     "name": "hiera-eyaml-gpg",
     "displayName": "hiera-eyaml-gpg",
-    "description": "Encrypt/decrypt using hiera-eyaml-gpg.",
+    "description": "Encrypt/Decrypt using hiera-eyaml-gpg.",
     "version": "0.0.1",
     "publisher": "conorsokell",
     "author": {
@@ -18,7 +18,6 @@
     "keywords": [
         "hiera",
         "eyaml",
-        "hiera-eyaml",
         "hiera-eyaml-gpg",
         "gpg",
         "puppet"
@@ -92,10 +91,10 @@
         "test": "node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
+        "@types/mocha": "^2.2.32",
         "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
+        "mocha": "^2.3.3",
+        "typescript": "^2.9.2",
+        "vscode": "^1.1.37"
     }
 }
